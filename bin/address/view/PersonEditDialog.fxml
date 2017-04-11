@@ -42,12 +42,12 @@
       </GridPane>
       <HBox layoutX="261.0" layoutY="259.0" spacing="10.0" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="7.0">
          <children>
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#handleOk" prefWidth="90.0" text="OK">
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#handleOk" prefWidth="100.0" text="OK">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button mnemonicParsing="false" onAction="#handleCancel" prefWidth="90.0" text="Cancel" />
+            <Button mnemonicParsing="false" onAction="#handleCancel" prefWidth="100.0" text="Cancel" />
          </children>
       </HBox>
    </children>

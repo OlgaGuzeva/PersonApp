@@ -13,6 +13,7 @@ import address.model.Person;
 import address.model.PersonListWrapper;
 import address.view.PersonEditDialogController;
 import address.view.PersonOverviewController;
+import address.view.RootLayoutController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -73,20 +74,34 @@ public class MainApp extends Application {
 		showPersonOverview();		
 	}
 	
-	/*������������� ��������� ������*/
+	/**
+	 * Инициализирует корневой макет и пытается загрузить последний открытый
+	 * файл с адресатами.
+	 */
 	public void initRootLayout(){
 		try{
-			//��������� �������� ����� �� fxml 
+			// Загружаем корневой макет из fxml файла.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
 			rootLayout = (BorderPane) loader.load();
 			
-			//���������� �����, ���������� �������� �����
+			// Отображаем сцену, содержащую корневой макет.
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
+			
+			// Даём контроллеру доступ к главному прилодению.
+			RootLayoutController controller = loader.getController();
+			controller.setMainApp(this);
+			
 			primaryStage.show();
 		}catch(IOException e){
 			e.printStackTrace();
+		}
+		
+		// Пытается загрузить последний открытый файл с адресатами.
+		File file = getPersonFilePath();
+		if(file != null){
+			loadPersonDataFromFile(file);
 		}
 	}
 	
@@ -230,7 +245,7 @@ public class MainApp extends Application {
 	 * 
 	 * @param file
 	 */
-	public void saxePersonDataToFile(File file){
+	public void savePersonDataToFile(File file){
 		try{
 			JAXBContext context = JAXBContext.newInstance(PersonListWrapper.class);
 			Marshaller m = context.createMarshaller();
@@ -250,6 +265,7 @@ public class MainApp extends Application {
 			alert.setTitle("Error");
 			alert.setHeaderText("Could not save data");
 			alert.setContentText("Could not save data to file:\n" + file.getPath());
+			System.out.println(e.getStackTrace());
 			
 			alert.showAndWait();
 		}
