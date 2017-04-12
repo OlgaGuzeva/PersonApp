@@ -115,5 +115,13 @@ public class RootLayoutController {
     private void handleExit() {
         System.exit(0);
     }
+    
+    /**
+     * Открывает статистику 
+     */
+    @FXML
+    private void handleShowBirthdayStatistic(){
+    	mainApp.showBirthdayStatistic();
+    }
 }
 
