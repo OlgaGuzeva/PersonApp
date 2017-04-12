@@ -12,20 +12,19 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * Класс-модель для адресата (Person).
+ *
+ * @author Marco Jakob
+ */
 public class Person {
 	
-	/**
-	 * Класс-модель для адресата (Person).
-	 *
-	 * @author Marco Jakob
-	 */
 	private final StringProperty firstName;
 	private final StringProperty lastName;
 	private final StringProperty street;
 	private final IntegerProperty postalCode;
 	private final StringProperty city;
-	private final ObjectProperty<LocalDate> birthday;
-	
+	private final ObjectProperty<LocalDate> birthday;	
 	
 	/**
      * Конструктор по умолчанию.
@@ -44,6 +43,7 @@ public class Person {
 		this.firstName = new SimpleStringProperty(firstName);
 		this.lastName = new SimpleStringProperty(lastName);
 		
+		// Some initial dummy data, just for convenient testing.
 		this.street = new SimpleStringProperty("some street");
 		this.postalCode = new SimpleIntegerProperty(1234);
 		this.city = new SimpleStringProperty("some city");
@@ -110,7 +110,7 @@ public class Person {
         return city;
     }
 
-    
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getBirthday() {
         return birthday.get();
     }
@@ -121,6 +121,5 @@ public class Person {
 
     public ObjectProperty<LocalDate> birthdayProperty() {
         return birthday;
-    }
-	
+    }	
 }

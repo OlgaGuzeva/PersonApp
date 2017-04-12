@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
  * 
  * @author Marco Jakob
  */
-public class LocalDateAdapter extends XmlAdapter{
+public class LocalDateAdapter extends XmlAdapter<String, LocalDate>{
 	
 	@Override
     public LocalDate unmarshal(String v) throws Exception {

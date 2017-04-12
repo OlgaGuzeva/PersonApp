@@ -14,14 +14,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "persons")
 public class PersonListWrapper {
 	
-	private List persons;
+	private List<Person> persons;
 	
 	@XmlElement(name = "person")
-	public List getPersons(){
+	public List<Person> getPersons(){
 		return persons;
 	}
 	
-	public void setPersons(List persons){
+	public void setPersons(List<Person> persons){
 		this.persons = persons;
 	}
 

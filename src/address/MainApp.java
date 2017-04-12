@@ -2,7 +2,6 @@ package address;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.SecurityPermission;
 import java.util.prefs.Preferences;
 
 import javax.xml.bind.JAXBContext;
@@ -53,13 +52,7 @@ public class MainApp extends Application {
         personData.add(new Person("Martin", "Mueller"));
 	}
 	
-	/**
-     * Возвращает данные в виде наблюдаемого списка адресатов.
-     * @return
-     */
-	public ObservableList<Person> getPersonData(){
-		return personData;
-	}
+	
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -165,13 +158,7 @@ public class MainApp extends Application {
 		}
 	}
 	
-	public Stage getPrimaryStage(){
-		return primaryStage;
-	}
-
-	public static void main(String[] args) {
-		launch(args);
-	}
+	
 	
 	/**
 	 * Возвращает preference файла адресатов, то есть, последний открытый файл.
@@ -247,7 +234,8 @@ public class MainApp extends Application {
 	 */
 	public void savePersonDataToFile(File file){
 		try{
-			JAXBContext context = JAXBContext.newInstance(PersonListWrapper.class);
+			JAXBContext context = JAXBContext
+					.newInstance(PersonListWrapper.class);
 			Marshaller m = context.createMarshaller();
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			
@@ -265,11 +253,31 @@ public class MainApp extends Application {
 			alert.setTitle("Error");
 			alert.setHeaderText("Could not save data");
 			alert.setContentText("Could not save data to file:\n" + file.getPath());
-			System.out.println(e.getStackTrace());
+			System.out.println(e.getMessage());
 			
 			alert.showAndWait();
 		}
 	}
 	
+	/**
+	 * Returns the main stage.
+	 * 
+	 * @return
+	 */
+	public Stage getPrimaryStage(){
+		return primaryStage;
+	}
+
+	/**
+     * Возвращает данные в виде наблюдаемого списка адресатов.
+     * 
+     * @return
+     */
+	public ObservableList<Person> getPersonData(){
+		return personData;
+	}
 	
+	public static void main(String[] args) {
+		launch(args);
+	}
 }
